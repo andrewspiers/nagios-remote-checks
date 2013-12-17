@@ -56,20 +56,22 @@ def create_defaults():
     return default
 
 
-def write_check(process, fqdn=socket.getfqdn(),
-                contact_groups="systems-admins"):
-    """given the name of a process, and the fqdn of the machine we
-    are checkning, write a nagios process check,
-    which will alert if the process is not running."""
+def write_ping_check(
+    hostname="server001-ipmi",
+    conf=create_defaults()
+                    ):
+    """given a hostname, and a ConfigParser object containing the template
+    to use, create the nagios command.
+    """
     out = []
-    indent = 4 * " "
+    indent = 2 * " "
     out.append("define service {")
     i_s = []  # indented section
-    i_s.append("host_name " + fqdn)
-    i_s.append("service_description " + process)
-    i_s.append("check_command check_nrpe_1arg!check_" + process + "_proc")
-    i_s.append("contact_groups " + contact_groups)
     i_s.append("use generic-service")
+    i_s.append("host_name " + hostname)
+    i_s.append("service_description ping " + hostname)
+    i_s.append("check_command check_nrpe_1arg!check_ping_" + hostname )
+    i_s.append("contact_groups " + conf.get('main','contact_groups'))
     indentedpart = "\n".join([indent + i for i in i_s])
     out.append(indentedpart)
     out.append("}\n\n")
@@ -81,8 +83,9 @@ def write_nrpe_ping_command(
                         conf=create_defaults()
 
                         ):
+
     """given a hostname,
-    return a nrpe conifguration line to check that a given host is answering
+    return a nrpe configuration line to check that a given host is answering
     ping.
 
     Use a configparser obj to determine the location of the nrpe check_ping
@@ -116,7 +119,7 @@ def main():
         print (output_checks)
     elif sys.argv[1] == "commands":
         for i in sys.argv[2:]:
-            print(write_nrpe_ping_command(hostname=i))
+            print(write_ping_check(hostname=i))
     else:
         print (usage)
         sys.exit(2)
