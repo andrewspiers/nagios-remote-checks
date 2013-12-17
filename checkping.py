@@ -24,7 +24,7 @@ import os
 import socket
 import sys
 
-if sys.version_info.major < 3:
+if sys.version[0] == "2":
     import ConfigParser as configparser
 else:
     import configparser
