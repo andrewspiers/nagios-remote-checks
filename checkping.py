@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 checkping.py : create nagios commands and checks to ping remote hosts via
 nrpe.
