@@ -1,0 +1,8 @@
+define service {
+>---host_name>-->--->---hostname.fqdn
+>---service_description ssh
+>---check_command>-->---check_ssh
+>---contact_groups>->---systems-admins
+>---use>>--->--->--->---generic-service
+}
+

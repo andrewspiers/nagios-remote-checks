@@ -1,0 +1,1 @@
+check_ssh [-46] [-t <timeout>] [-r <remote version>] [-p <port>] <host>
