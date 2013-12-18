@@ -34,7 +34,7 @@ usage = ''.join(("usage: type 'checks' or 'commands' followed by a space ",
                 "separated list of all the hosts for which you want checks ",
                 "created.\n eg "))
 usage += sys.argv[0]
-usage += "checks host01 host02 host03"
+usage += " checks host01 host02 host03"
 
 def create_defaults():
     """return a ConfigParser object with default values in it.
