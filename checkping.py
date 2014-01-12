@@ -48,7 +48,9 @@ def create_defaults():
                         'critical_packetloss': '100%%',
                         'contact_groups': 'systems-admins',
             }
-    #default = configparser.RawConfigParser()
+    #guess that the host this is running on is, in fact, the 'intervening
+    #server'
+    main['intervening_server'] = socket.gethostname()
     default = configparser.SafeConfigParser()
     default.add_section('main')
     for key in main.keys():
@@ -68,7 +70,7 @@ def write_ping_check(
     out.append("define service {")
     i_s = []  # indented section
     i_s.append("use generic-service")
-    i_s.append("host_name " + hostname)
+    i_s.append("host_name " + conf.get('main','intervening_server'))
     i_s.append("service_description ping " + hostname)
     i_s.append("check_command check_nrpe_1arg!check_ping_" + hostname )
     i_s.append("contact_groups " + conf.get('main','contact_groups'))

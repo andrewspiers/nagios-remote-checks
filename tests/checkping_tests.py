@@ -1,4 +1,5 @@
 from nose.tools import *
+import socket
 import sys
 if sys.version_info.major < 3:
     import ConfigParser as configparser
@@ -19,6 +20,11 @@ def test_defaults_not_blank():
     s.seek(0)
     text = s.read()
     assert text != ""
+
+def test_defaults_contains_intervening_server():
+    d = checkping.create_defaults()
+    print (d)
+    assert_equal(d.get('main','intervening_server'),socket.gethostname())
 
 def test_check_ping_command():
     desiredOutput = "command[check_ping_server001-ipmi]"
@@ -51,7 +57,7 @@ def test_output_checks():
 def test_write_ping_check():
     lines = ("define service {",
              "  use generic-service",
-             "  host_name server001-ipmi",
+             "  host_name " + socket.gethostname(),
              "  service_description ping server001-ipmi",
              "  check_command check_nrpe_1arg!check_ping_server001-ipmi",
              "  contact_groups systems-admins",
