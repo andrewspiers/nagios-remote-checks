@@ -81,9 +81,7 @@ def write_ping_check(
 def write_nrpe_ping_command(
                         hostname="server001-ipmi",
                         conf=create_defaults()
-
                         ):
-
     """given a hostname,
     return a nrpe configuration line to check that a given host is answering
     ping.
@@ -107,6 +105,7 @@ def write_nrpe_ping_command(
     out += conf.get('main','critical_packetloss')
     out += "\n"
     return out
+
 
 def output_checks():
   """Wrapper to call all of the checks"""
