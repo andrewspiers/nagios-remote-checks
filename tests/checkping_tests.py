@@ -35,6 +35,15 @@ def test_guess_intervening_server_normalcase():
     guess = checkping.guess_intervening_server('server001',suffix="-m")
     assert_equal(guess,intervening)
 
+@raises (ValueError)
+def test_guess_intervening_server_no_end_digit():
+    remote = "server"
+    checkping.guess_intervening_server(remote)
+
+@raises(ValueError)
+def test_guess_intervening_server_all_digits():
+    remote = "123500"
+    checkping.guess_intervening_server(remote)
 
 def test_output_checks():
     assert_not_equal(checkping.output_checks(),"")

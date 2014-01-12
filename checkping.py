@@ -122,7 +122,7 @@ def guess_intervening_server(remoteserver, suffix='m'):
             return out
     alert=('remote server name should begin with something that is not ')
     alert+=('a digit.\n I got server name ')
-    alert+=servername
+    alert+=remoteserver
     sys.stderr.write(alert)
     print (i)
     print (remoteserver)
