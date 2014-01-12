@@ -120,9 +120,9 @@ def main():
         print (usage)
         sys.exit(2)
 
-    if sys.argv[1] == "checks":
-        print (output_checks())
-    elif sys.argv[1] == "commands":
+    if sys.argv[1] == "commands":
+        print (write_nrpe_ping_command())
+    elif sys.argv[1] == "checks":
         for i in sys.argv[2:]:
             print(write_ping_check(hostname=i))
     else:
