@@ -50,7 +50,7 @@ def create_defaults():
             }
     #guess that the host this is running on is, in fact, the 'intervening
     #server'
-    main['intervening_server'] = socket.gethostname()
+    main['intervening_server'] = socket.getfqdn()
     default = configparser.SafeConfigParser()
     default.add_section('main')
     for key in main.keys():

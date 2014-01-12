@@ -24,7 +24,7 @@ def test_defaults_not_blank():
 def test_defaults_contains_intervening_server():
     d = checkping.create_defaults()
     print (d)
-    assert_equal(d.get('main','intervening_server'),socket.gethostname())
+    assert_equal(d.get('main','intervening_server'),socket.getfqdn())
 
 def test_check_ping_command():
     desiredOutput = "command[check_ping_server001-ipmi]"
@@ -57,7 +57,7 @@ def test_output_checks():
 def test_write_ping_check():
     lines = ("define service {",
              "  use generic-service",
-             "  host_name " + socket.gethostname(),
+             "  host_name " + socket.getfqdn(),
              "  service_description ping server001-ipmi",
              "  check_command check_nrpe_1arg!check_ping_server001-ipmi",
              "  contact_groups systems-admins",
