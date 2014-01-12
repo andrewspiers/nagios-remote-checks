@@ -29,6 +29,13 @@ def test_check_ping_command():
     desiredOutput += "\n"
     assert_equal(checkping.write_nrpe_ping_command('server001-ipmi'),desiredOutput)
 
+def test_guess_intervening_server_normalcase():
+    remote = "server001"
+    intervening = "server-m"
+    guess = checkping.guess_intervening_server('server001',suffix="-m")
+    assert_equal(guess,intervening)
+
+
 def test_output_checks():
     assert_not_equal(checkping.output_checks(),"")
 

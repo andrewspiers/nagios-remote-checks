@@ -106,6 +106,28 @@ def write_nrpe_ping_command(
     out += "\n"
     return out
 
+def guess_intervening_server(remoteserver, suffix='m'):
+    """given the name of a remoteserver like server01,
+    ie ending with digits, have a guess at the name of the
+    intervening server by substituting for the digits for
+    the suffix. ('m' is for management.)
+    """
+    if not remoteserver[-1].isdigit():
+        sys.stderr.write('remote server name should end with a digit.\n')
+        raise ValueError
+    for i in remoteserver[::-1]:  # remoteserver reversed
+        if not i.isdigit():
+            print (i)
+            out = remoteserver[:remoteserver.rindex(i)+1] + suffix
+            return out
+    alert=('remote server name should begin with something that is not ')
+    alert+=('a digit.\n I got server name ')
+    alert+=servername
+    sys.stderr.write(alert)
+    print (i)
+    print (remoteserver)
+    raise ValueError
+
 
 def output_checks():
   """Wrapper to call all of the checks"""
