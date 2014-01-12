@@ -108,6 +108,12 @@ def write_nrpe_ping_command(
     out += "\n"
     return out
 
+def output_checks():
+  """Wrapper to call all of the checks"""
+  output = ""
+  output += write_ping_check()
+
+
 def main():
     """do main stuff
     """

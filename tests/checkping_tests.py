@@ -29,6 +29,9 @@ def test_check_ping_command():
     desiredOutput += "\n"
     assert_equal(checkping.write_nrpe_ping_command('server001-ipmi'),desiredOutput)
 
+def test_output_checks():
+    assert_not_equal(checkping.output_checks(),"")
+
 def test_write_ping_check():
     lines = ("define service {",
              "  use generic-service",
