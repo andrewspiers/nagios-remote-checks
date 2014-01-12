@@ -122,7 +122,7 @@ def main():
         sys.exit(2)
 
     if sys.argv[1] == "checks":
-        print (output_checks)
+        print (output_checks())
     elif sys.argv[1] == "commands":
         for i in sys.argv[2:]:
             print(write_ping_check(hostname=i))
