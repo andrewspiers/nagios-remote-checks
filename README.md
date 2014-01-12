@@ -17,6 +17,14 @@ Configuration
 -------------
 
 
+Usage With xCAT
+---------------
+
+If you use xCAT you can get use the 'nodels' command to get the list of
+hosts you wish to generate config for::
+
+  nodels compute | xargs ./checkping.py checks > generated_ping_checks.cfg
+
 
 
 Documentation for the check_ping plugin:
